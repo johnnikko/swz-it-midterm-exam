@@ -4,6 +4,7 @@ class DisastersController < ApplicationController
 
   def index
     @disaster = Disaster.all
+    @disaster = Disaster.page(params[:page]).per(10)
   end
 
   def new
