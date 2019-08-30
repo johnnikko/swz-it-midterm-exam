@@ -1,0 +1,29 @@
+<h1>Disaster List</h1>
+<%= link_to "Add New Disaster",new_disaster_path, class: "btn btn-success" %>
+<br>
+<br>
+<table class="table table-bordered">
+  <thead>
+  <th width="5%">Id</th>
+  <th width="20%">Disaster Title</th>
+  <th width="55%">Date Created</th>
+  <th width="20%">Action</th>
+  </thead>
+  <tbody>
+  <% @disaster.each do |disaster| %>
+    <tr>
+      <td><%= disaster.id %></td>
+      <td><%= disaster.title%></td>
+      <td><%= time_ago_in_words(disaster.created_at)%> ago, last updated: <%= time_ago_in_words(disaster.updated_at)%> ago.</td>
+      <td>
+        <%=link_to "Read",disaster_path(disaster), class: "btn btn-success" %>
+        <%=link_to "Update",edit_disaster_path(disaster), class: "btn btn-primary" %>
+        <%= link_to "Delete", disaster_path(disaster),
+                    method: :delete,
+                    data:{confirm: "Are you sure to delete?"},
+                    class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
