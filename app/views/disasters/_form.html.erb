@@ -1,0 +1,18 @@
+<%= form_for disaster do |f| %>
+  <div class="form-group">
+    <%= f.label :Title, class:"control-label", for: "title" %>
+    <%= f.text_field :title, class: "form-control", type: "text", id: "title", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Category, class:"control-label", for: "category" %>
+    <%= f.collection_select :category_id, Category.order(:category_id),:id,:category_name, class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :Description, class:"control-label", for: "desc" %>
+    <%= f.text_area :description, class: "form-control", type: "text", id: "desc", placeholder: "Type here..", rows: "10" %>
+  </div>
+  <div class="pull-right">
+    <%= f.submit class: "btn btn-primary"%>
+    <%= link_to "Back", disasters_path, class: "btn btn-default"%>
+  </div>
+<% end %>
