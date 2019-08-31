@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_070511) do
+ActiveRecord::Schema.define(version: 2019_08_30_074236) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "disaster_id"
+    t.string "users_comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disaster_id"], name: "index_comments_on_disaster_id"
   end
 
   create_table "disasters", force: :cascade do |t|
