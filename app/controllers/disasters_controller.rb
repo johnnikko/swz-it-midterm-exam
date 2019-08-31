@@ -3,7 +3,6 @@ class DisastersController < ApplicationController
   before_action :set_disaster, only:[:update,:show,:edit,:destroy]
 
   def index
-    @disaster = Disaster.all
     @disaster = Disaster.page(params[:page]).per(10)
   end
 
@@ -23,7 +22,8 @@ class DisastersController < ApplicationController
   end
 
   def show
-    #set_disaster
+    @comments = Comment.new
+    @comments_all = @disaster.comments.all
   end
 
   def edit
