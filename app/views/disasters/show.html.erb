@@ -28,10 +28,16 @@
       </div>
     </div>
     <hr>
-    <div class="pull-right">
-      <%= link_to "Edit Disaster", edit_disaster_path(@disaster.id), class: "btn btn-primary" %>
-      <%= link_to "Back", disasters_path, class: "btn btn-default" %>
-    </div>
+    <% if author? %>
+      <div class="pull-right">
+        <%= link_to "Edit Disaster", edit_disaster_path(@disaster.id), class: "btn btn-primary" %>
+        <%= link_to "Delete", disaster_path(@disaster),
+                    method: :delete,
+                    data:{confirm: "Are you sure to delete?"},
+                    class: "btn btn-danger" %>
+        <%= link_to "Back", disasters_path, class: "btn btn-default" %>
+      </div>
+    <% end %>
   </div>
 </div>
 <%= render partial: "comments/commentpartial" %>

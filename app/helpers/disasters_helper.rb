@@ -1,0 +1,3 @@
+module DisastersHelper
+
+end
