@@ -2,8 +2,11 @@ class DisastersController < ApplicationController
 
   before_action :set_disaster, only:[:update,:show,:edit,:destroy]
 
+  helper_method :author?
+
+
   def index
-    @disaster = Disaster.page(params[:page]).per(10)
+    @disaster = Disaster.page(params[:page]).per(5)
   end
 
   def new
@@ -12,9 +15,9 @@ class DisastersController < ApplicationController
 
   def create
     @disaster = Disaster.new(disaster_params)
-
+    @disaster.user_id = current_user.id
     if @disaster.save
-      flash[:success] = "Disaster save"
+      flash[:success] = "Disaster save!"
       redirect_to disasters_path(@disaster)
     else
       render :new
@@ -23,14 +26,14 @@ class DisastersController < ApplicationController
 
   def show
     @comments = Comment.new
-    @comments_all = @disaster.comments.all
+
   end
 
   def edit
     #set_disaster
   end
 
-  def update
+  def update(page)
     if @disaster.update(disaster_params)
       flash[:sucess] = "Disaster updated"
       redirect_to disasters_path(@disaster)
@@ -52,5 +55,10 @@ class DisastersController < ApplicationController
 
   def disaster_params
     params.require(:disaster).permit(:title, :description,:category_id)
+  end
+
+  def author?
+    @disaster = Disaster.find(params[:id])
+    @disaster.user_id == current_user.id
   end
 end
