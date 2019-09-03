@@ -20,7 +20,7 @@ class DisastersController < ApplicationController
     @disaster.user_id = current_user.id
     if @disaster.save
       flash[:success] = "Disaster save!"
-      redirect_to disasters_path(@disaster)
+      redirect_to disasters_path
     else
       render :new
     end
@@ -31,12 +31,13 @@ class DisastersController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
-    if current_user.disasters.update(disaster_params)
-      flash[:sucess] = "Disaster updated"
-      redirect_to disasters_path(@disaster)
+    if @disaster.update(disaster_params)
+      flash[:success] = "Disaster updated"
+      redirect_to disasters_path
     else
       render :edit
     end
@@ -59,7 +60,7 @@ class DisastersController < ApplicationController
 
   def check_user
     @disaster = Disaster.find(params[:id])
-    unless current_user.id == @disaster.id
+    unless current_user.id == @disaster.user_id
       flash['danger'] = "You can edit your own information"
       redirect_to disasters_path
      end

@@ -1,4 +1,4 @@
-<%= form_for disaster do |f| %>
+<%= form_for disaster, url: url, method: methods do |f| %>
   <div class="form-group">
     <%= f.label :Title, class:"control-label", for: "title" %>
     <%= f.text_field :title, class: "form-control", type: "text", id: "title", autofocus: true %>

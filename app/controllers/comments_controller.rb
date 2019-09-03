@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:destroy]
+  before_action :check_user, only: [:destroy]
   def create
     @disaster = Disaster.find(params[:disaster_id])
-    @comments = Comment.new(comment_params)
-    @comments.disaster_id = @disaster.id
+    @comments = @disaster.comments.new(comment_params)
     @comments.user_id = current_user.id
     if @comments.save
       flash[:success] = "Comment added"

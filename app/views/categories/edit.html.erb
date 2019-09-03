@@ -1,2 +1,2 @@
 <h1>Edit Category Information</h1>
-<%= render partial: "form", locals: {category: @category} %>
+<%= render partial: "form", locals: {category: @category, url: category_path, methods: :put} %>

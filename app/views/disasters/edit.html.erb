@@ -1,2 +1,2 @@
 <h1>Edit Disaster Information</h1>
-<%= render 'form', disaster: @disaster %>
+<%= render partial: 'form', locals: {disaster: @disaster, url: disaster_path, methods: :put}   %>
