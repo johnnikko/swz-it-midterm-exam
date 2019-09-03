@@ -21,6 +21,7 @@ services:
     volumes:
       - .:/usr/src/app
       - ~/.ssh:/root/.ssh:ro
+      - bundle-volume:/usr/local/bundle
     ports:
       - "3000:3000"
     depends_on:
@@ -31,12 +32,9 @@ services:
   redis:
     image: redis
     command: ["redis-server", "--appendonly", "yes"]
-    volumes:
-      - ./docker/redis:/data
     ports:
       - "6379:6379"
 
 #Volumes
 volumes:
-  dbdata:
-    driver: local
+  bundle-volume:

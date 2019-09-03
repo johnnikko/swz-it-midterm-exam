@@ -1,12 +1,14 @@
 class DisastersController < ApplicationController
 
-  before_action :set_disaster, only:[:update,:show,:edit,:destroy]
+  before_action :set_disaster, only: [:update,:show,:edit,:destroy]
+  before_action :check_user, only: [:edit,:update,:destroy]
 
   helper_method :author?
 
 
   def index
-    @disaster = Disaster.page(params[:page]).per(5)
+    @disaster = Disaster.includes(:comments).page(params[:page]).per(10)
+    @disaster = @disaster.where(user_id: params[:user_id]) if params[:user_id]
   end
 
   def new
@@ -26,15 +28,13 @@ class DisastersController < ApplicationController
 
   def show
     @comments = Comment.new
-
   end
 
   def edit
-    #set_disaster
   end
 
-  def update(page)
-    if @disaster.update(disaster_params)
+  def update
+    if current_user.disasters.update(disaster_params)
       flash[:sucess] = "Disaster updated"
       redirect_to disasters_path(@disaster)
     else
@@ -55,6 +55,14 @@ class DisastersController < ApplicationController
 
   def disaster_params
     params.require(:disaster).permit(:title, :description,:category_id)
+  end
+
+  def check_user
+    @disaster = Disaster.find(params[:id])
+    unless current_user.id == @disaster.id
+      flash['danger'] = "You can edit your own information"
+      redirect_to disasters_path
+     end
   end
 
   def author?

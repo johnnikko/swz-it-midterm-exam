@@ -1,0 +1,25 @@
+<h1>Categories</h1>
+<%= link_to "Add New", new_category_path, class: "btn btn-success" %>
+<br>
+<br>
+<table class="table table-bordered">
+  <thead>
+    <th width="5%">Id</th>
+    <th width="20%">Category Name</th>
+    <th width="60%">Description</th>
+    <th width="15%">Action</th>
+  </thead>
+  <tbody>
+  <% @categories.each do |categories|%>
+  <tr>
+    <td><%= categories.id %></td>
+    <td><%= categories.category_name %></td>
+    <td><%= categories.description %></td>
+    <td>
+      <%= link_to "Update", edit_category_path(categories), class: "btn btn-primary col-sm-6" %>
+      <%= link_to "Delete", category_path(categories),method: :delete,data:{confirm: "Are you sure to delete?"}, class: "btn btn-danger col-sm-6" %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,7 +1,8 @@
 class Disaster < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
-  has_many :comments
+  has_many :comments, dependent: :destroy
+
   validates :title, presence: true, length: {minimun:3,maximum:50}
   validates :description, presence: true
 

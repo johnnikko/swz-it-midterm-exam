@@ -16,6 +16,13 @@ class CommentsController < ApplicationController
     redirect_to disaster_path(params[:disaster_id])
   end
   private
+  def check_user
+    @comment = Comment.find(params[:id])
+    unless current_user.id == @comment.id
+      flash['danger'] = "You can edit your own information"
+      redirect_to disaster_comments_path
+    end
+  end
   def comment_params
     params.require(:comment).permit(:users_comment)
   end

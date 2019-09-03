@@ -1,0 +1,19 @@
+<h1>Users</h1>
+<table class="table table-bordered">
+  <thead>
+  <th width="5%">Id</th>
+  <th width="75%">Email</th>
+  <th width="10%">Disasters</th>
+  <th width="10%">Action</th>
+  </thead>
+  <tbody>
+  <% @users.each do |users| %>
+  <tr>
+    <td><%= users.id %></td>
+    <td><%= users.email %></td>
+    <td><%= link_to "#{users.disasters.size}", user_disasters_path(users.id) %></td>
+    <td><%= link_to "Delete", user_path(users.id), method: :delete, data:{confirm: "Are you sure to delete?"}, class: "btn btn-danger col-sm-12"%></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

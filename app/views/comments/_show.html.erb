@@ -13,7 +13,9 @@
       </div>
     </div>
     <div class="col-sm-1">
-      <%= link_to "X",disaster_comment_path(@disaster,comment),method: :delete,data:{confirm: "Are you sure to delete?"},class: "btn btn-danger" %>
+      <% if author? %>
+        <%= link_to "X",disaster_comment_path(@disaster,comment),method: :delete,data:{confirm: "Are you sure to delete?"},class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
   <hr>

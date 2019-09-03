@@ -1,0 +1,15 @@
+<%= form_for category do |f| %>
+  <div class="form">
+    <%= f.label :category_name %>
+    <%= f.text_field :category_name, class: "form-control" %>
+  </div>
+  <div class="form">
+    <%= f.label :Description %>
+    <%= f.text_area :description, class: "form-control", rows: "10" %>
+  </div>
+  <br>
+  <div class="pull-right">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", categories_path, class: "btn btn-default" %>
+  </div>
+<% end %>

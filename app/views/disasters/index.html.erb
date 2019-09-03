@@ -16,7 +16,7 @@
       <td><%= disaster.id %></td>
       <td><%= disaster.title%></td>
       <td><%= time_ago_in_words(disaster.created_at)%> ago, last updated: <%= time_ago_in_words(disaster.updated_at)%> ago.</td>
-      <td><%= disaster.comments.count%></td>
+      <td><%= disaster.comments.size%></td>
       <td>
         <%=link_to "Read",disaster_path(disaster), class: "btn btn-primary col-sm-12" %>
       </td>

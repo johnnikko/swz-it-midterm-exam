@@ -5,7 +5,7 @@
   </div>
   <div class="form-group">
     <%= f.label :Category, class:"control-label", for: "category" %>
-    <%= f.collection_select :category_id, Category.order(:category_id),:id,:category_name, class: "form-control"%>
+    <%= f.select :category_id,Category.all.pluck(:category_name,:id),{prompt:'select category'},{class: "form-control"}%>
   </div>
   <div class="form-group">
     <%= f.label :Description, class:"control-label", for: "desc" %>
